@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import anime from 'animejs';
+import { animate, random } from 'animejs';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -8,8 +8,7 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     if (textRef.current) {
-      anime({
-        targets: textRef.current,
+      animate(textRef.current, {
         translateY: [-50, 0],
         opacity: [0, 1],
         duration: 1500,
@@ -32,12 +31,11 @@ const Hero: React.FC = () => {
         
         heroRef.current.appendChild(particle);
         
-        anime({
-          targets: particle,
-          translateX: () => anime.random(-50, 50),
-          translateY: () => anime.random(-50, 50),
-          opacity: () => anime.random(0.1, 0.7),
-          duration: () => anime.random(2000, 5000),
+        animate(particle, {
+          translateX: () => random(-50, 50),
+          translateY: () => random(-50, 50),
+          opacity: () => random(0.1, 0.7),
+          duration: () => random(2000, 5000),
           direction: 'alternate',
           loop: true,
           easing: 'easeInOutSine'
